@@ -18,9 +18,13 @@
         <b>5.</b> UpdatePizza - измение пиццы, доступна только Admin и SuperAdmin</br>
         <b>6.</b> DeletePizza - удаление пиццы по id, доступна только Admin и SuperAdmin</br>
         <b>7.</b> AddPizzaToUser - добавление пиццы по ее id в профиль пользователя, кто добавлял ее. Доступна всем кто авторизован в системе. </br>
-    <b>Контроллер User имеет данный функционал (Controllers->UserController</Controllers->):</br>
+    <b>Контроллер User имеет данный функционал (Controllers->UserController</b>):</br>
        <b>1.</b> GetAllUser - получение всех пользователей доступен всем, даже не авторизованным в системе</br>
         <b>2.</b> GetById - получение пользователя по его id, так же доступен всем</br>
         <b>3.</b> CreateUser - создание пользователя, доступна только Admin и SuperAdmin</br>
         <b>4.</b> UpdateUser - измение пользователя, доступна только Admin и SuperAdmin</br>
         <b>5.</b> DeleteUser - удаление пользователя по id, доступна только Admin и SuperAdmin</br>
+    Контроллер обращается через интерфейс репозитория, логика контроллера пиццы - скрыта в <b>Repositoy->PizzaRepository</b>, </br>
+    Контроллер обращается через интерфейс репозитория, логика контроллера пользователя - в <b>Repositoy->UserRepository</b></br>
+    В <b>Repository->AuthRepository</b> скрыта логика для регистрации и авторизации и реализована в контролле <b>Controller->AuthController</b></br>
+    PizzaRepository и UserRepository наследуются от обобщенного репозитория GenericRepository куда мы передаем лишь модель возращаемого типо и по которой будет обращаться к бд</br>
