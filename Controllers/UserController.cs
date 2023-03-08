@@ -34,12 +34,6 @@ namespace Pizza.Controllers
             return Ok(response.Data);
          }
 
-        // [HttpGet()]
-        // public async Task<ActionResult<RepositoryResponse<UserResponse>>> GetUsersByParamsAsync(QueryParametersPizza parameters) 
-        // {
-        //     return Ok(await _userRepository.GetByQueryParamsAsync(parameters));
-        // }
-
         [Authorize(UserRole.SuperAdmin, UserRole.Admin)]
         [HttpPost("Create")]
         public async Task<ActionResult<RepositoryResponse<UserResponse>>> CreateUserAsync(CreateUser user) 
