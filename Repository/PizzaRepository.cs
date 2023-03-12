@@ -6,14 +6,14 @@ namespace Pizza.Repository
     {
         private readonly DataContext _context;
         private readonly IHttpContextAccessor _httpContextAccessor; 
-        private readonly UserRepository _repository;
+        private readonly IMapper _mapper;
 
         public PizzaRepository(DataContext context, IMapper mapper, 
-            IHttpContextAccessor httpContextAccessor, UserRepository repository) : base(context, mapper)
+            IHttpContextAccessor httpContextAccessor) : base(context, mapper)
         {
             _context = context;
             _httpContextAccessor = httpContextAccessor;
-            _repository = repository;
+            _mapper = mapper;
         }
 
         public async Task<RepositoryResponse<List<PizzaModel>>> GetByQueryParamsAsync(QueryParametersPizza parameters)
@@ -46,6 +46,8 @@ namespace Pizza.Repository
             var response = new RepositoryResponse<List<PizzaModel>>();
             var user = (UserResponse)_httpContextAccessor.HttpContext!.Items["User"]!;
             var countPizzas = await _context.Pizzas.ToListAsync();
+            var genericRepository = new GenericRepository<UserModel>(_context, _mapper);
+
 
             if(pizzaId > countPizzas.Count || pizzaId < 1)
             {
@@ -61,7 +63,7 @@ namespace Pizza.Repository
 
             user.Pizzas.Add(pizza);
 
-            await _repository.UpdateAsync(user, user.Id);
+            await genericRepository.UpdateAsync(user, user.Id);
             
             response.Data = user.Pizzas;
 

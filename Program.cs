@@ -16,9 +16,9 @@ var builder = WebApplication.CreateBuilder(args);
         o.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()));
     builder.Services.AddAutoMapper(typeof(Program).Assembly);
     
-    builder.Services.AddScoped<IPizzaRepository, PizzaRepository>();
     builder.Services.AddScoped<IAuthRepository, AuthRepository>();
     builder.Services.AddScoped<IUserRepository, UserRepository>();
+    builder.Services.AddScoped<IPizzaRepository, PizzaRepository>();
     builder.Services.AddScoped<IJwtUtils, JwtUtils>();
     builder.Services.AddHttpContextAccessor();
 }
